@@ -2,7 +2,7 @@ import { CssBaseline, ThemeProvider } from '@material-ui/core';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from './redux';
+import { store } from './redux/store';
 import { theme } from './theme/muiTheme';
 
 export interface AppProviderProps {}
