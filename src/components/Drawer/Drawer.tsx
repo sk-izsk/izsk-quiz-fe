@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   link: {
     textDecoration: 'none',
     color: theme.palette.primary.main,
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
 }));
 

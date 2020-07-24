@@ -1,11 +1,9 @@
 import { AppBar, IconButton, makeStyles, Toolbar, Typography } from '@material-ui/core';
 import clsx from 'clsx';
 import React, { FC, useState } from 'react';
-import { AiOutlineSafety } from 'react-icons/ai';
-import { FaBriefcaseMedical, FaHospitalSymbol } from 'react-icons/fa';
-import { FcAbout, FcGlobe, FcHome } from 'react-icons/fc';
-import { GiDeathZone } from 'react-icons/gi';
+import { FcAbout, FcHome, FcIdea } from 'react-icons/fc';
 import { IoMdMenu } from 'react-icons/io';
+import { RiLogoutCircleRLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { Drawer } from '..';
 import { theme } from '../../theme/muiTheme';
@@ -58,29 +56,14 @@ const menuItems: MenuItem[] = [
     icon: <FcHome size={25} />,
   },
   {
-    name: 'Countries',
-    to: '/countries',
-    icon: <FcGlobe size={25} />,
+    name: 'Start quiz !!!',
+    to: '/quiz',
+    icon: <FcIdea size={25} />,
   },
   {
-    name: 'Confirmed',
-    to: '/confirmed',
-    icon: <FaHospitalSymbol size={25} color={theme.palette.primary.light} />,
-  },
-  {
-    name: 'New cases',
-    to: '/new-cases',
-    icon: <FaBriefcaseMedical size={25} color={theme.palette.success.main} />,
-  },
-  {
-    name: 'Recovered',
-    to: '/recovered',
-    icon: <AiOutlineSafety size={25} color={theme.palette.success.light} />,
-  },
-  {
-    name: 'Deaths',
-    to: '/deaths',
-    icon: <GiDeathZone size={25} color={theme.palette.error.main} />,
+    name: 'Logout',
+    to: '/logout',
+    icon: <RiLogoutCircleRLine size={25} color={theme.palette.primary.main} />,
   },
   {
     name: 'About',
