@@ -3,26 +3,66 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
-    "@types/jest": "^24.0.0",
-    "@types/node": "^12.0.0",
-    "@types/react": "^16.9.0",
-    "@types/react-dom": "^16.9.0",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "@reduxjs/toolkit": "^1.4.0",
+    "axios": "^0.19.2",
+    "clsx": "^1.1.1",
+    "date-fns": "^2.15.0",
+    "history": "^5.0.0",
+    "husky": "^4.2.5",
+    "particles-bg": "^2.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-icons": "^3.10.0",
+    "react-query": "^2.5.6",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
-    "typescript": "~3.7.2"
+    "react-spring": "^8.0.27",
+    "ui-neumorphism": "^1.0.9"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test-ci": "react-scripts test --coverage",
+    "prettier:check": "prettier --config .prettierrc.js --check \"*/**/*.{ts,tsx,js,jsx,json,sass,scss,css,html,md}\"",
+    "prettier:fix": "yarn prettier:check --write",
+    "prettier:fix-all": "yarn prettier:check --write",
+    "tslint": "tslint --project tsconfig.json",
+    "lint:check": "eslint --config .eslintrc.js \"src/**/*.{ts,tsx}\"",
+    "lint:fix": "yarn lint:check --fix",
+    "quality:check": "yarn lint:check && yarn prettier:check",
+    "quality:fix": "yarn lint:fix && yarn prettier:fix",
+    "precommit:check": "yarn prettier:fix-all",
+    "clean": "rm -fr node_modules"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit:check"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.1",
+    "@testing-library/react": "^10.4.7",
+    "@testing-library/user-event": "^12.0.13",
+    "@types/date-fns": "^2.6.0",
+    "@types/history": "^4.7.6",
+    "@types/jest": "^26.0.7",
+    "@types/node": "^14.0.25",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "lint": "^0.7.0",
+    "prettier": "^2.0.5",
+    "tslint": "^6.1.2",
+    "typescript": "~3.9.7"
   },
   "browserslist": {
     "production": [
