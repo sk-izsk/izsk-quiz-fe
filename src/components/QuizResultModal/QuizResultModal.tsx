@@ -31,15 +31,8 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     width: '100%',
   },
   cardContent: {
-    // display: 'grid',
-    // gridTemplateColumns: '1fr 1fr 1fr',
-    // gridTemplateRows: '1fr 1fr',
     textAlign: 'center',
   },
-  title: {},
-  type: {},
-  question: {},
-  result: {},
 }));
 
 const QuizResultModal: React.FC<QuizResultModalProps> = ({ onClose, visible }) => {
@@ -48,13 +41,13 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({ onClose, visible }) =
     <Dialog className={classes.modalContainer} visible={visible} onClose={onClose} persistent={true}>
       <Card className={classes.card} inset={true}>
         <CardContent className={classes.cardContent}>
-          <H5 className={classes.title}>Quiz Title</H5>
-          <H6 className={classes.type}>Type of quiz</H6>
+          <H5>Quiz Title</H5>
+          <H6>Type of quiz</H6>
           <Subtitle2 className={classes.dateContainer} secondary>
             date of quiz
           </Subtitle2>
-          <H6 className={classes.question}>Question answered correctly : 8/10</H6>
-          <H6 className={classes.result}>
+          <H6>Question answered correctly : 8/10</H6>
+          <H6>
             Result of quiz :<span> Passed</span>
           </H6>
         </CardContent>

@@ -20,7 +20,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-spring": "^8.0.27",
-    "ui-neumorphism": "^1.0.9"
+    "ui-neumorphism": "^1.0.9",
+    "yup": "^0.29.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -59,6 +60,7 @@
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.9",
     "@types/react-router-dom": "^5.1.5",
+    "@types/yup": "^0.29.3",
     "lint": "^0.7.0",
     "prettier": "^2.0.5",
     "tslint": "^6.1.2",
