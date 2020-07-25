@@ -1,7 +1,7 @@
 import { InputLabel, makeStyles } from '@material-ui/core';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Button, Card, CardAction, CardContent, Dialog, TextField } from 'ui-neumorphism';
+import { Button, CardAction, TextField } from 'ui-neumorphism';
 import { Actions } from '../../redux';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 import {
@@ -13,6 +13,7 @@ import {
   useValueForTextField,
 } from '../../utils';
 import { quizOptionSchema } from '../../validation';
+import { DialogContainer } from '../DialogContainer/DialogContainer';
 import { SelectContainer } from '../SelectContainer/SelectContainer';
 
 export interface QuizOptionsModalProps {}
@@ -21,9 +22,6 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   modalContainer: {
     maxWidth: 500,
     width: '100%',
-    padding: theme.spacing(1),
-  },
-  card: {
     padding: theme.spacing(1),
   },
   btnContainer: {
@@ -36,8 +34,6 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   },
   cardContent: {
     display: 'grid',
-    // gridTemplateColumns: '1fr',
-    // gridTemplateRows: '1fr',
   },
   selectContainer: {
     backgroundColor: theme.palette.primary.light,
@@ -98,41 +94,14 @@ const QuizOptionsModal: React.FC<QuizOptionsModalProps> = () => {
   };
 
   return (
-    <Dialog className={classes.modalContainer} visible={open} onClose={() => {}} persistent={true}>
-      <Card className={classes.card} inset={true} loading={loading}>
-        <CardContent className={classes.cardContent}>
-          <TextField
-            className={classes.inputContainer}
-            width={400}
-            type='number'
-            placeholder='Number of Questions(Cannot be more than 50)'
-            value={numberOfQuestions}
-            onChange={handleNumberOfQuestion}
-            disabled={loading}
-          />
-          {error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
-          <SelectContainer
-            options={quizCategoryOptions}
-            label='Select Any Category'
-            value={categoryValue}
-            handleChange={handleCategoryValue}
-            disable={loading}
-          />
-          <SelectContainer
-            options={questionDifficultyLevel}
-            label='Select Difficulty'
-            value={difficultyLevel}
-            handleChange={handleDifficultyLevel}
-            disable={loading}
-          />
-          <SelectContainer
-            options={questionTypeOptions}
-            label='Select Type'
-            value={questionType}
-            handleChange={handleQuestionType}
-            disable={loading}
-          />
-        </CardContent>
+    <DialogContainer
+      dialogStyle={classes.modalContainer}
+      inset={true}
+      cardLoading={loading}
+      cardContentStyle={classes.cardContent}
+      visible={open}
+      onClose={() => {}}
+      cardAction={
         <CardAction className={classes.btnContainer}>
           <Button
             disabled={loading}
@@ -144,8 +113,40 @@ const QuizOptionsModal: React.FC<QuizOptionsModalProps> = () => {
             Create quiz
           </Button>
         </CardAction>
-      </Card>
-    </Dialog>
+      }
+    >
+      <TextField
+        className={classes.inputContainer}
+        width={400}
+        type='number'
+        placeholder='Number of Questions(Cannot be more than 50)'
+        value={numberOfQuestions}
+        onChange={handleNumberOfQuestion}
+        disabled={loading}
+      />
+      {error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
+      <SelectContainer
+        options={quizCategoryOptions}
+        label='Select Any Category'
+        value={categoryValue}
+        handleChange={handleCategoryValue}
+        disable={loading}
+      />
+      <SelectContainer
+        options={questionDifficultyLevel}
+        label='Select Difficulty'
+        value={difficultyLevel}
+        handleChange={handleDifficultyLevel}
+        disable={loading}
+      />
+      <SelectContainer
+        options={questionTypeOptions}
+        label='Select Type'
+        value={questionType}
+        handleChange={handleQuestionType}
+        disable={loading}
+      />
+    </DialogContainer>
   );
 };
 

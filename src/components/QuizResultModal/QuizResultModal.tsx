@@ -1,6 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import React from 'react';
-import { Button, Card, CardAction, CardContent, Dialog, H5, H6, Subtitle2 } from 'ui-neumorphism';
+import { Button, CardAction, H5, H6, Subtitle2 } from 'ui-neumorphism';
+import { DialogContainer } from '..';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 
 export interface QuizResultModalProps {
@@ -38,19 +39,12 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
 const QuizResultModal: React.FC<QuizResultModalProps> = ({ onClose, visible }) => {
   const classes = useStyles();
   return (
-    <Dialog className={classes.modalContainer} visible={visible} onClose={onClose} persistent={true}>
-      <Card className={classes.card} inset={true}>
-        <CardContent className={classes.cardContent}>
-          <H5>Quiz Title</H5>
-          <H6>Type of quiz</H6>
-          <Subtitle2 className={classes.dateContainer} secondary>
-            date of quiz
-          </Subtitle2>
-          <H6>Question answered correctly : 8/10</H6>
-          <H6>
-            Result of quiz :<span> Passed</span>
-          </H6>
-        </CardContent>
+    <DialogContainer
+      cardContentStyle={classes.cardContent}
+      inset={true}
+      visible={visible}
+      onClose={onClose}
+      cardAction={
         <CardAction className={classes.btnContainer}>
           <Button onClick={onClose} className={classes.btn} rounded color={theme.palette.primary.main}>
             Close
@@ -59,8 +53,18 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({ onClose, visible }) =
             Retry
           </Button>
         </CardAction>
-      </Card>
-    </Dialog>
+      }
+    >
+      <H5>Quiz Title</H5>
+      <H6>Type of quiz</H6>
+      <Subtitle2 className={classes.dateContainer} secondary>
+        date of quiz
+      </Subtitle2>
+      <H6>Question answered correctly : 8/10</H6>
+      <H6>
+        Result of quiz :<span> Passed</span>
+      </H6>
+    </DialogContainer>
   );
 };
 
