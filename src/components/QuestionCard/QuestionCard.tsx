@@ -1,5 +1,6 @@
 import { Box, makeStyles } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import clsx from 'clsx';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Body1, Button, CardAction, Divider, H6, Radio, RadioGroup } from 'ui-neumorphism';
 import { CardContainer } from '..';
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   },
   timerContainer: {
     display: 'flex',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     marginBottom: theme.spacing(1),
   },
   question: {
@@ -51,6 +52,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     maxWidth: 200,
     width: '100%',
     marginTop: theme.spacing(1),
+  },
+  boldText: {
+    fontWeight: 'bold',
   },
 }));
 
@@ -77,10 +81,6 @@ const QuestionCard: React.FC<QuestionCardProps> = () => {
     }
   };
 
-  useEffect(() => {
-    setAnswer(undefined);
-  }, [questionNumber]);
-
   const handleAnswers = (event: any) => {
     setAnswer(event.value);
   };
@@ -91,26 +91,33 @@ const QuestionCard: React.FC<QuestionCardProps> = () => {
 
   const pageReload = () => window.location.reload();
 
-  const quizDetails = {
-    date: new Date(),
-    correctAnswer: correct,
-    totalQuestion: questions.questions?.length,
-    title: getTypeOfQuiz(questions.questions as QuestionList[]),
-    type: getDifficultyOfQuiz(questions.questions as QuestionList[]),
-  };
+  let quizDetails;
+
+  if (questions.questions !== undefined && questions.questions.length > 0) {
+    quizDetails = {
+      date: new Date(),
+      correctAnswer: correct,
+      totalQuestion: questions.questions?.length,
+      title: getTypeOfQuiz(questions.questions as QuestionList[]),
+      type: getDifficultyOfQuiz(questions.questions as QuestionList[]),
+    };
+  }
 
   return (
     <>
       <QuizResultModal onClose={handleCloseResultModal} retry={pageReload} visible={resultModal} {...quizDetails} />
       {questions.questions !== undefined && questions.questions.length > 0 ? (
         <Box className={classes.mainContainer}>
+          {/* <Box className={classes.timerContainer}>
+            <Timer seconds={timer} />
+          </Box> */}
           <CardContainer
             cardStyle={classes.mainContainer}
             cardLoading={cardLoading}
             cardAction={
               <CardAction className={classes.btnContainer}>
                 <Button
-                  disabled={disable}
+                  disabled={disable || answer === undefined}
                   onClick={handleNextQuestion}
                   className={classes.btn}
                   rounded
@@ -123,11 +130,15 @@ const QuestionCard: React.FC<QuestionCardProps> = () => {
             inset={true}
           >
             <Box className={classes.typeContainer}>
-              <Body1>Category:{questions.questions[questionNumber].category}</Body1>
-              <Body1>Type:{questions.questions[questionNumber].type}</Body1>
+              <Body1>
+                Category: <span className={classes.boldText}>{questions.questions[questionNumber].category}</span>
+              </Body1>
+              <Body1>
+                Type: <span className={classes.boldText}>{questions.questions[questionNumber].type}</span>
+              </Body1>
             </Box>
             <Divider style={{ marginTop: theme.spacing(1) }} />
-            <H6 className={classes.question}>
+            <H6 className={clsx([classes.question, classes.boldText])}>
               {questionNumber + 1}:
               <div dangerouslySetInnerHTML={{ __html: questions.questions[questionNumber].question }} />
             </H6>

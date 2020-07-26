@@ -9,50 +9,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-9 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
-      >
-        <div
-          class="_2So3v _2uw1B "
-        >
-          <h5
-            class="_3yPwv _2TwOi _11JjB _1uvOH "
-          >
-            Quiz Title
-          </h5>
-          <p
-            class="_3yPwv _2vNlX _1QRSN _1uvOH makeStyles-dateContainer-8"
-          >
-            date of quiz
-          </p>
-          <p
-            class="_3yPwv _i_J81 _11JjB _1uvOH "
-          >
-            Result of quiz
-            <br />
-            Passed
-          </p>
-        </div>
-        <div
-          class="_qCt7a _1l5Ig "
-        >
-          <div
-            class="_cL4RU _17_OS  _3W7Om _CWiZp _39_ND "
-            style="color: rgb(238, 252, 243); background-color: rgb(33, 150, 243);"
-          >
-            <button
-              class="_3lLt8"
-            >
-              More details
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="MuiBox-root MuiBox-root-21 makeStyles-cardContainer-6"
-    >
-      <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -95,7 +52,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-22 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -138,7 +95,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-23 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -181,7 +138,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-24 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -224,7 +181,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-25 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -267,7 +224,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-26 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -310,7 +267,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-27 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -353,7 +310,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-28 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -396,7 +353,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-29 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -439,7 +396,7 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-30 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -482,7 +439,50 @@ exports[`Home renders correctly 1`] = `
       class="MuiBox-root MuiBox-root-31 makeStyles-cardContainer-6"
     >
       <div
-        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-20"
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
+      >
+        <div
+          class="_2So3v _2uw1B "
+        >
+          <h5
+            class="_3yPwv _2TwOi _11JjB _1uvOH "
+          >
+            Quiz Title
+          </h5>
+          <p
+            class="_3yPwv _2vNlX _1QRSN _1uvOH makeStyles-dateContainer-8"
+          >
+            date of quiz
+          </p>
+          <p
+            class="_3yPwv _i_J81 _11JjB _1uvOH "
+          >
+            Result of quiz
+            <br />
+            Passed
+          </p>
+        </div>
+        <div
+          class="_qCt7a _1l5Ig "
+        >
+          <div
+            class="_cL4RU _17_OS  _3W7Om _CWiZp _39_ND "
+            style="color: rgb(238, 252, 243); background-color: rgb(33, 150, 243);"
+          >
+            <button
+              class="_3lLt8"
+            >
+              More details
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiBox-root MuiBox-root-32 makeStyles-cardContainer-6"
+    >
+      <div
+        class="_28vIk _2bGnb _1SFBz _12WTq makeStyles-card-21"
       >
         <div
           class="_2So3v _2uw1B "
@@ -523,7 +523,7 @@ exports[`Home renders correctly 1`] = `
     </div>
   </div>
   <div
-    class="MuiBox-root MuiBox-root-32 makeStyles-paginateContainer-3"
+    class="MuiBox-root MuiBox-root-33 makeStyles-paginateContainer-3"
   >
     <nav
       aria-label="pagination navigation"

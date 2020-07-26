@@ -9,3 +9,4 @@ export { QuizOptionsModal } from './QuizOptionsModal/QuizOptionsModal';
 export { QuizResultCard } from './QuizResultCard/QuizResultCard';
 export { QuizResultModal } from './QuizResultModal/QuizResultModal';
 export { SelectContainer } from './SelectContainer/SelectContainer';
+export { Timer } from './Timer/Timer';

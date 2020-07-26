@@ -19,7 +19,7 @@ const LoadingScreen: React.FC<LoadingScreenProps> = () => {
   const classes = useStyles();
   return (
     <div className={classes.loaderContainer}>
-      <ProgressCircular indeterminate size={80} width={10} color={theme.palette.primary.main} />
+      <ProgressCircular indeterminate size={100} width={10} color={theme.palette.primary.main} />
     </div>
   );
 };

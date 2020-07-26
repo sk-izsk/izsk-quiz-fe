@@ -25,7 +25,7 @@ describe('question list reducer', () => {
               difficulty: 'mock difficulty',
               question: 'mock question',
               correct_answer: 'mock-1',
-              incorrect_answers: ['mock-2', 'mock-3'],
+              incorrect_answers: ['mock-1'],
             },
           ],
         } as Payload['questions'],
@@ -35,11 +35,11 @@ describe('question list reducer', () => {
       questions: [
         {
           question: 'mock question',
-          answers: ['mock-2', 'mock-3', 'mock-1'],
+          answers: ['mock-1'],
           category: 'mock category',
           type: 'mock type',
           difficulty: 'mock difficulty',
-          indexOfCorrectAnswer: 2,
+          indexOfCorrectAnswer: 0,
         },
       ],
     });

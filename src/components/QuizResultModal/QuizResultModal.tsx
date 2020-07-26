@@ -57,6 +57,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
       textDecoration: 'none',
     },
   },
+  boldText: {
+    fontWeight: 'bold',
+  },
 }));
 
 const QuizResultModal: React.FC<QuizResultModalProps> = ({
@@ -98,8 +101,10 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({
         </CardAction>
       }
     >
-      <H5>{title}</H5>
-      <H6>Type of quiz:{type}</H6>
+      <H5 className={classes.boldText}>{title}</H5>
+      <H6>
+        Type of quiz: <span className={classes.boldText}>{type}</span>
+      </H6>
       {quizResult === 'Passed' ? (
         <TiTick size={100} color={theme.palette.success.main} />
       ) : (
@@ -109,7 +114,10 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({
         {date && format(date as Date, 'do MMM yyyy')}
       </Subtitle2>
       <H6>
-        Question answered correctly : {correctAnswer}/{totalQuestion}
+        Question answered correctly:
+        <span className={classes.boldText}>
+          {correctAnswer}/{totalQuestion}
+        </span>
       </H6>
       <H6>
         Result of quiz :

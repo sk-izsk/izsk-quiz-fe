@@ -120,7 +120,7 @@ const QuizOptionsModal: React.FC<QuizOptionsModalProps> = () => {
         width={400}
         type='number'
         placeholder='Number of Questions(Cannot be more than 50)'
-        value={numberOfQuestions as string}
+        value={numberOfQuestions}
         onChange={handleNumberOfQuestion}
         disabled={loading}
         autofocus
