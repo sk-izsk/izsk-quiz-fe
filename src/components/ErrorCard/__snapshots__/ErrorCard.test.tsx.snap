@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ErrorCard renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="_28vIk _2bGnb _2Xmdp _1SFBz makeStyles-card-2 makeStyles-mainContainer-1"
+  >
+    <div
+      class="_2So3v _2uw1B "
+    >
+      <h4
+        class="_3yPwv _1N96j _11JjB _1uvOH "
+      >
+        Something goes wrong
+      </h4>
+      <svg
+        enable-background="new 0 0 48 48"
+        fill="currentColor"
+        height="60"
+        size="60"
+        stroke="currentColor"
+        stroke-width="0"
+        version="1"
+        viewBox="0 0 48 48"
+        width="60"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M24,6C14.1,6,6,14.1,6,24s8.1,18,18,18s18-8.1,18-18S33.9,6,24,6z M24,10c3.1,0,6,1.1,8.4,2.8L12.8,32.4 C11.1,30,10,27.1,10,24C10,16.3,16.3,10,24,10z M24,38c-3.1,0-6-1.1-8.4-2.8l19.6-19.6C36.9,18,38,20.9,38,24C38,31.7,31.7,38,24,38 z"
+          fill="#D50000"
+        />
+      </svg>
+      <h6
+        class="_3yPwv _2wZct _11JjB _1uvOH "
+      >
+        We don't get any quiz questions on your selection. 
+        <br />
+         Try to select different options other than what you chose.
+      </h6>
+    </div>
+  </div>
+</DocumentFragment>
+`;

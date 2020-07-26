@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quiz renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiBox-root MuiBox-root-2 makeStyles-mainContainer-1"
+  >
+    <div
+      class="makeStyles-loaderContainer-34"
+    >
+      <div
+        aria-valuemax="100"
+        aria-valuemin="0"
+        aria-valuenow="0"
+        class="__234s  _2YVD0 _NijRA "
+        id="_25371_"
+        role="progressbar"
+        style="width: 89px; height: 89px;"
+      >
+        <div
+          class="_1QMv-"
+          style="width: 80px; height: 80px; transform: translate3d(-50%, -50%, 0) rotate(0deg);"
+        >
+          <svg
+            class="_2vn3-"
+            viewBox="45.714285714285715 45.714285714285715 91.42857142857143 91.42857142857143"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle
+              class="_53Md9"
+              cx="91.42857142857143"
+              cy="91.42857142857143"
+              r="40"
+              style="stroke-width: 10; stroke-dasharray: 251.327; stroke-dashoffset: 251.32741228718345;"
+            />
+          </svg>
+        </div>
+        <div
+          class="_3Jx6J"
+          style="width: 85px; height: 85px;"
+        />
+        <div
+          class="_1iTMT"
+          style="width: 54px; height: 54px;"
+        />
+        <label
+          class="_2hjq3"
+          style="font-size: 24px;"
+        />
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

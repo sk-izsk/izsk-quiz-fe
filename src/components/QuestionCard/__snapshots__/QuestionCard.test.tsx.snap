@@ -1,16 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LoadingScreen renders correctly 1`] = `
+exports[`QuestionCard renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="makeStyles-loaderContainer-1"
+    class="makeStyles-loaderContainer-19"
   >
     <div
       aria-valuemax="100"
       aria-valuemin="0"
       aria-valuenow="0"
       class="__234s  _2YVD0 _NijRA "
-      id="_50073_"
+      id="_00641_"
       role="progressbar"
       style="width: 89px; height: 89px;"
     >

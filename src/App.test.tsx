@@ -1,9 +1,13 @@
-import React from 'react';
 import { render } from '@testing-library/react';
+import React from 'react';
 import App from './App';
+import { RouterContextProvider } from './RouterContextProvider';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('App renders correctly', () => {
+  const { asFragment } = render(
+    <RouterContextProvider>
+      <App />
+    </RouterContextProvider>,
+  );
+  expect(asFragment()).toMatchSnapshot();
 });
