@@ -123,6 +123,7 @@ const QuizOptionsModal: React.FC<QuizOptionsModalProps> = () => {
         value={numberOfQuestions}
         onChange={handleNumberOfQuestion}
         disabled={loading}
+        autofocus
       />
       {error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
       <SelectContainer

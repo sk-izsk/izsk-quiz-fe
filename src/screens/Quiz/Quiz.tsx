@@ -1,12 +1,24 @@
-import { Box } from '@material-ui/core';
+import { Box, makeStyles } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { QuizOptionsModal } from '../../components';
+import { QuestionCard, QuizOptionsModal } from '../../components';
 import { addQuestions } from '../../redux';
+import { CustomTheme } from '../../theme/muiTheme';
 
 export interface QuizProps {}
 
+const useStyles = makeStyles((theme: CustomTheme) => ({
+  mainContainer: {
+    display: 'flex',
+    width: '100vw',
+    height: '100vh',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+}));
+
 const Quiz: React.FC<QuizProps> = () => {
+  const classes = useStyles();
   const dispatch = useDispatch();
   useEffect(() => {
     return () => {
@@ -14,9 +26,9 @@ const Quiz: React.FC<QuizProps> = () => {
     };
   }, [dispatch]);
   return (
-    <Box>
+    <Box className={classes.mainContainer}>
       <QuizOptionsModal />
-      <div>hello</div>
+      <QuestionCard />
     </Box>
   );
 };
