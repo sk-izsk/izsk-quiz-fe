@@ -1,5 +1,5 @@
 import { Box, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Body1, Button, CardAction, Divider, H6, Radio, RadioGroup } from 'ui-neumorphism';
 import { CardContainer } from '..';
@@ -66,19 +66,20 @@ const QuestionCard: React.FC<QuestionCardProps> = () => {
   const handleNextQuestion = () => {
     if (questions.questions !== undefined && questions.questions[questionNumber].indexOfCorrectAnswer === answer) {
       setCorrect(correct + 1);
-      console.log('tick-1');
     }
     if (questions.questions?.length === questionNumber + 1) {
       setDisable(true);
       setCardLoading(true);
       setResultModal(true);
-      console.log('tick-1');
     } else {
       setAnswer(undefined);
       setQuestionNumber(questionNumber + 1);
-      console.log('tick-3');
     }
   };
+
+  useEffect(() => {
+    setAnswer(undefined);
+  }, [questionNumber]);
 
   const handleAnswers = (event: any) => {
     setAnswer(event.value);
@@ -90,18 +91,17 @@ const QuestionCard: React.FC<QuestionCardProps> = () => {
 
   const pageReload = () => window.location.reload();
 
+  const quizDetails = {
+    date: new Date(),
+    correctAnswer: correct,
+    totalQuestion: questions.questions?.length,
+    title: getTypeOfQuiz(questions.questions as QuestionList[]),
+    type: getDifficultyOfQuiz(questions.questions as QuestionList[]),
+  };
+
   return (
     <>
-      <QuizResultModal
-        onClose={handleCloseResultModal}
-        retry={pageReload}
-        visible={resultModal}
-        date={new Date()}
-        correctAnswer={correct}
-        totalQuestion={questions.questions?.length}
-        title={getTypeOfQuiz(questions.questions as QuestionList[])}
-        type={getDifficultyOfQuiz(questions.questions as QuestionList[])}
-      />
+      <QuizResultModal onClose={handleCloseResultModal} retry={pageReload} visible={resultModal} {...quizDetails} />
       {questions.questions !== undefined && questions.questions.length > 0 ? (
         <Box className={classes.mainContainer}>
           <CardContainer

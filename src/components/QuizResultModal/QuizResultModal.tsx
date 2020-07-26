@@ -86,9 +86,15 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({
               Close
             </Button>
           </Link>
-          <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
-            Retry
-          </Button>
+          {retry ? (
+            <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
+              Retry
+            </Button>
+          ) : (
+            <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
+              Re-take
+            </Button>
+          )}
         </CardAction>
       }
     >
