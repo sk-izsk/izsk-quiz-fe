@@ -1,5 +1,8 @@
 import { makeStyles } from '@material-ui/core';
+import { format } from 'date-fns';
 import React from 'react';
+import { TiDelete, TiTick } from 'react-icons/ti';
+import { Link } from 'react-router-dom';
 import { Button, CardAction, H5, H6, Subtitle2 } from 'ui-neumorphism';
 import { DialogContainer } from '..';
 import { CustomTheme, theme } from '../../theme/muiTheme';
@@ -7,6 +10,12 @@ import { CustomTheme, theme } from '../../theme/muiTheme';
 export interface QuizResultModalProps {
   visible?: boolean;
   onClose?: () => void;
+  retry?: () => void;
+  title?: string;
+  type?: string;
+  date?: string | Date;
+  totalQuestion?: number;
+  correctAnswer?: number;
 }
 
 const useStyles = makeStyles((theme: CustomTheme) => ({
@@ -34,10 +43,36 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   cardContent: {
     textAlign: 'center',
   },
+  failedText: {
+    color: theme.palette.secondary.main,
+    fontWeight: 'bold',
+  },
+  passedText: {
+    color: theme.palette.success.main,
+    fontWeight: 'bold',
+  },
+  link: {
+    textDecoration: 'none',
+    '&:hover': {
+      textDecoration: 'none',
+    },
+  },
 }));
 
-const QuizResultModal: React.FC<QuizResultModalProps> = ({ onClose, visible }) => {
+const QuizResultModal: React.FC<QuizResultModalProps> = ({
+  onClose,
+  visible,
+  correctAnswer,
+  date,
+  retry,
+  title,
+  totalQuestion,
+  type,
+}) => {
   const classes = useStyles();
+
+  const quizResult = (correctAnswer as number) / (totalQuestion as number) >= 0.7 ? 'Passed' : 'Failed';
+
   return (
     <DialogContainer
       cardContentStyle={classes.cardContent}
@@ -46,23 +81,33 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({ onClose, visible }) =
       onClose={onClose}
       cardAction={
         <CardAction className={classes.btnContainer}>
-          <Button onClick={onClose} className={classes.btn} rounded color={theme.palette.primary.main}>
-            Close
-          </Button>
-          <Button onClick={onClose} className={classes.btn} rounded color={theme.palette.primary.main}>
+          <Link onClick={onClose} className={classes.link} to='/home'>
+            <Button className={classes.btn} rounded color={theme.palette.primary.main}>
+              Close
+            </Button>
+          </Link>
+          <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
             Retry
           </Button>
         </CardAction>
       }
     >
-      <H5>Quiz Title</H5>
-      <H6>Type of quiz</H6>
+      <H5>{title}</H5>
+      <H6>Type of quiz:{type}</H6>
+      {quizResult === 'Passed' ? (
+        <TiTick size={100} color={theme.palette.success.main} />
+      ) : (
+        <TiDelete size={100} color={theme.palette.secondary.main} />
+      )}
       <Subtitle2 className={classes.dateContainer} secondary>
-        date of quiz
+        {date && format(date as Date, 'do MMM yyyy')}
       </Subtitle2>
-      <H6>Question answered correctly : 8/10</H6>
       <H6>
-        Result of quiz :<span> Passed</span>
+        Question answered correctly : {correctAnswer}/{totalQuestion}
+      </H6>
+      <H6>
+        Result of quiz :
+        <span className={quizResult === 'Failed' ? classes.failedText : classes.passedText}> {quizResult}</span>
       </H6>
     </DialogContainer>
   );

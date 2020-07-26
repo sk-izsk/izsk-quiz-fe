@@ -22,7 +22,7 @@ const Quiz: React.FC<QuizProps> = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     return () => {
-      dispatch(addQuestions([]));
+      dispatch(addQuestions({ response_code: 2, results: [] }));
     };
   }, [dispatch]);
   return (

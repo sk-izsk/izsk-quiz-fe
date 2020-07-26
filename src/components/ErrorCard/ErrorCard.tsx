@@ -21,7 +21,7 @@ const ErrorCard: React.FC<ErrorCardProps> = () => {
       <FcCancel size={60} />
       <H6>
         We don't get any quiz questions on your selection. <br /> Try to select different options other than what you
-        chose
+        chose.
       </H6>
     </CardContainer>
   );

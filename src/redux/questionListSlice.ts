@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { indexOf, shuffle } from 'lodash';
-import { Question } from '../api/response';
+import { Question, QuestionListResponse } from '../api/response';
 export interface QuestionList {
   question: string;
   answers: string[];
@@ -10,15 +10,20 @@ export interface QuestionList {
   indexOfCorrectAnswer: string | number;
 }
 
-let initialState: QuestionList[] = [];
+export interface Questions {
+  responseCode?: number;
+  questions?: QuestionList[];
+}
+
+let initialState: Questions = {};
 
 const questionListSlice = createSlice({
   name: 'questionList',
   initialState,
   reducers: {
-    addQuestions: (state: QuestionList[], action: PayloadAction<Question[]>) => {
+    addQuestions: (state: Questions, action: PayloadAction<QuestionListResponse>) => {
       let questionList: QuestionList[] = [];
-      action.payload.forEach((question: Question) => {
+      action.payload.results.forEach((question: Question) => {
         const answers = shuffle(question.incorrect_answers.concat([question.correct_answer]));
         const indexOfCorrectAnswer = indexOf(answers, question.correct_answer);
         questionList.push({
@@ -30,7 +35,7 @@ const questionListSlice = createSlice({
           category: question.category,
         });
       });
-      state = questionList;
+      state = { responseCode: action.payload.response_code, questions: questionList };
       return state;
     },
   },
