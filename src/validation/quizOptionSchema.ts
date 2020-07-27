@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { stringSchema } from '.';
+import { numberSchema, stringSchema } from '.';
 export interface QuizOptionSchema {
   numberOfQuestions?: number;
   categoryValue?: number | null;
@@ -8,8 +8,7 @@ export interface QuizOptionSchema {
 }
 
 const quizOptionSchema = yup.object<QuizOptionSchema>().shape({
-  numberOfQuestions: yup
-    .number()
+  numberOfQuestions: numberSchema
     .min(1, 'Number of questions must be more than 0')
     .max(50, 'Number of questions must be less than or equal to 50'),
   categoryValue: yup.number().nullable(),
