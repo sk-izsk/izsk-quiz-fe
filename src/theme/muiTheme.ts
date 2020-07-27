@@ -81,6 +81,7 @@ let muiTheme: Theme = createMuiTheme({
     h6: {
       fontWeight: 'normal',
     },
+    fontFamily: ['Comic Neue', 'Roboto', '"Helvetica Neue"', 'Arial', 'sans-serif'].join(','),
   },
 });
 

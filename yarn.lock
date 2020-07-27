@@ -1672,6 +1672,11 @@
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.5.tgz#dcce4430e64b443ba8945f0290fb564ad5bac6dd"
   integrity sha512-7+2BITlgjgDhH0vvwZU/HZJVyk+2XUlvxXe8dFMedNX/aMkaOq++rMAFXc0tM7ij15QaWlbdQASBR9dihi+bDQ==
 
+"@types/lodash@^4.14.158":
+  version "4.14.158"
+  resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.158.tgz#b38ea8b6fe799acd076d7a8d7ab71c26ef77f785"
+  integrity sha512-InCEXJNTv/59yO4VSfuvNrZHt7eeNtWQEgnieIA+mIC+MOWM9arOWG2eQ8Vhk6NbOre6/BidiXhkZYeDY9U35w==
+
 "@types/minimatch@*":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
@@ -1970,6 +1975,11 @@
     "@webassemblyjs/ast" "1.8.5"
     "@webassemblyjs/wast-parser" "1.8.5"
     "@xtuc/long" "4.2.2"
+
+"@xendora/react-timer@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@xendora/react-timer/-/react-timer-1.1.0.tgz#aea810270c58b87cea024c33396d7473ccbd4cf6"
+  integrity sha512-ubk9Dx8xsnSZWFMcr3BEfPl7Tl/Qpb/RynV8/qkGWbgKH9QFDFArVXFjjU2Cqhmwo9cHrWg8g+Oj2ocD2UqWEA==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
@@ -9241,6 +9251,13 @@ react-app-polyfill@^1.0.6:
     regenerator-runtime "^0.13.3"
     whatwg-fetch "^3.0.0"
 
+react-countdown-circle-timer@^2.3.7:
+  version "2.3.7"
+  resolved "https://registry.yarnpkg.com/react-countdown-circle-timer/-/react-countdown-circle-timer-2.3.7.tgz#21a038ca5f5d604043b100275d9ccaa20c3a8f31"
+  integrity sha512-OcO/Iaze3cA/MwqQwovGg4E9x+FXmriFNTYOC1Au2t68MMyv2tEZtU24V4jlFBS2M28EE8X+jcsxfJu0FReQHg==
+  dependencies:
+    use-elapsed-time "^2.1.5"
+
 react-dev-utils@^10.2.1:
   version "10.2.1"
   resolved "https://registry.yarnpkg.com/react-dev-utils/-/react-dev-utils-10.2.1.tgz#f6de325ae25fa4d546d09df4bb1befdc6dd19c19"
@@ -11157,6 +11174,11 @@ url@^0.11.0:
   dependencies:
     punycode "1.3.2"
     querystring "0.2.0"
+
+use-elapsed-time@^2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/use-elapsed-time/-/use-elapsed-time-2.1.5.tgz#db1e83c9ce5a12c2fb17d80c9b87621ceac50c3f"
+  integrity sha512-+JMPN3gmT5vPUKlkIB8JK9zQ2y68cnyJb3EH3CJOmO85XEe5wJHdXqF3vv7PwLH6yiS1giHSu8hatYk/LPw2wA==
 
 use@^3.1.0:
   version "3.1.1"
