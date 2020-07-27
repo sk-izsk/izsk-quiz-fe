@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import 'ui-neumorphism/dist/index.css';
 import { AppProvider } from './AppProvider';
 import { LoadingScreen, NavBar } from './components';
-import { AboutScreen, HomeScreen, QuizScreen } from './lazyComponents';
+import { AboutScreen, HomeScreen, LoginScreen, QuizScreen, SignUpScreen } from './lazyComponents';
 
 const App: React.FC = () => {
   return (
@@ -17,6 +17,8 @@ const App: React.FC = () => {
           <Route path='/home' exact component={HomeScreen} />
           <Route path='/about' exact component={AboutScreen} />
           <Route path='/quiz' exact component={QuizScreen} />
+          <Route path='/sign-up' exact component={SignUpScreen} />
+          <Route path='/login' exact component={LoginScreen} />
         </Suspense>
       </Switch>
     </AppProvider>
