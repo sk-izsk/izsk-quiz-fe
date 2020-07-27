@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import React, { FC, useState } from 'react';
 import { FcAbout, FcHome, FcIdea } from 'react-icons/fc';
 import { IoMdMenu } from 'react-icons/io';
-import { RiLogoutCircleRLine } from 'react-icons/ri';
+import { MdAccountCircle } from 'react-icons/md';
+import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom';
 import { Drawer } from '..';
 import { theme } from '../../theme/muiTheme';
@@ -51,6 +52,16 @@ export interface MenuItem {
 
 const menuItems: MenuItem[] = [
   {
+    name: 'Login',
+    to: '/login',
+    icon: <RiLoginCircleLine size={25} color={theme.palette.primary.main} />,
+  },
+  {
+    name: 'Sign Up',
+    to: '/sign-up',
+    icon: <MdAccountCircle size={25} color={theme.palette.primary.main} />,
+  },
+  {
     name: 'Home',
     to: '/home',
     icon: <FcHome size={25} />,
@@ -63,7 +74,7 @@ const menuItems: MenuItem[] = [
   {
     name: 'Logout',
     to: '/logout',
-    icon: <RiLogoutCircleRLine size={25} color={theme.palette.primary.main} />,
+    icon: <RiLogoutCircleRLine size={25} color={theme.palette.secondary.main} />,
   },
   {
     name: 'About',

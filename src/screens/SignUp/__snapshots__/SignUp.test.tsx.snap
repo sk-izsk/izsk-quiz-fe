@@ -71,7 +71,7 @@ exports[`SignUp renders correctly 1`] = `
           >
             <input
               class="_U6nBC _2nHt_ "
-              id="_50346_"
+              id="_72662_"
               placeholder="Enter your nick name"
               style="width: 400px; min-height: undefinedpx;"
               type="text"
@@ -94,7 +94,7 @@ exports[`SignUp renders correctly 1`] = `
           >
             <input
               class="_U6nBC _2nHt_ "
-              id="_33100_"
+              id="_52630_"
               placeholder="Enter your email"
               style="width: 400px; min-height: undefinedpx;"
               type="text"
@@ -117,7 +117,7 @@ exports[`SignUp renders correctly 1`] = `
           >
             <input
               class="_U6nBC _2nHt_ "
-              id="_67264_"
+              id="_34751_"
               placeholder="Enter your password"
               style="width: 400px; min-height: undefinedpx;"
               type="password"
@@ -140,7 +140,7 @@ exports[`SignUp renders correctly 1`] = `
           >
             <input
               class="_U6nBC _2nHt_ "
-              id="_03513_"
+              id="_63003_"
               placeholder="Re type your password"
               style="width: 400px; min-height: undefinedpx;"
               type="password"
