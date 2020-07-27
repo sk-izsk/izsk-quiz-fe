@@ -81,11 +81,7 @@ const Login: React.FC<LoginProps> = () => {
       console.log('this is login details', validatedLoginDetails);
     } catch (err) {
       console.warn(err);
-      if (err.path === 'email' && err.name === 'ValidationError') {
-        setErrorType(err.path);
-        setError(err.message);
-      }
-      if (err.path === 'password' && err.name === 'ValidationError') {
+      if (['email', 'password'].includes(err.path) && err.name === 'ValidationError') {
         setErrorType(err.path);
         setError(err.message);
       }

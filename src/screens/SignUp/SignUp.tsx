@@ -80,19 +80,7 @@ const SignUp: React.FC<SignUpProps> = () => {
       console.log(validatedSignUpDetails);
     } catch (err) {
       console.warn(err);
-      if (err.path === 'email' && err.name === 'ValidationError') {
-        setErrorType(err.path);
-        setError(err.message);
-      }
-      if (err.path === 'password' && err.name === 'ValidationError') {
-        setErrorType(err.path);
-        setError(err.message);
-      }
-      if (err.path === 'nickName' && err.name === 'ValidationError') {
-        setErrorType(err.path);
-        setError(err.message);
-      }
-      if (err.path === 'confirmPassword' && err.name === 'ValidationError') {
+      if (['email', 'password', 'nickName', 'confirmPassword'].includes(err.path) && err.name === 'ValidationError') {
         setErrorType(err.path);
         setError(err.message);
       }

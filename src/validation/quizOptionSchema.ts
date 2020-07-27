@@ -8,7 +8,10 @@ export interface QuizOptionSchema {
 }
 
 const quizOptionSchema = yup.object<QuizOptionSchema>().shape({
-  numberOfQuestions: yup.number().min(1).max(50),
+  numberOfQuestions: yup
+    .number()
+    .min(1, 'Number of questions must be more than 0')
+    .max(50, 'Number of questions must be less than or equal to 50'),
   categoryValue: yup.number().nullable(),
   difficultyLevel: stringSchema.nullable(),
   questionType: stringSchema.nullable(),
