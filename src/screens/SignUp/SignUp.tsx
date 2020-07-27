@@ -1,11 +1,12 @@
-import { Box, makeStyles } from '@material-ui/core';
-import React from 'react';
+import { Box, InputLabel, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
 import { FcIdea } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import { Button, CardAction, H6, TextField } from 'ui-neumorphism';
 import { CardContainer } from '../../components';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 import { useValueForTextField } from '../../utils';
+import { signUpSchema } from '../../validation';
 
 export interface SignUpProps {}
 
@@ -50,6 +51,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     fontWeight: 'bold',
     color: theme.palette.primary.main,
   },
+  error: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
 const SignUp: React.FC<SignUpProps> = () => {
@@ -57,11 +61,42 @@ const SignUp: React.FC<SignUpProps> = () => {
   const [nickName, handleNickName] = useValueForTextField('');
   const [email, handleEmail] = useValueForTextField('');
   const [password, handlePassword] = useValueForTextField('');
-  const [reTypePassword, handleReTypePassword] = useValueForTextField('');
+  const [confirmPassword, handleConfirmPassword] = useValueForTextField('');
+  const [error, setError] = useState<string>('');
+  const [errorType, setErrorType] = useState<string>('');
 
-  const handleSignUp = (event: KeyboardEvent) => {
-    event.preventDefault();
-    console.log(nickName, email, password, reTypePassword);
+  const handleSignUp = async (event: KeyboardEvent) => {
+    try {
+      event.preventDefault();
+      setError('');
+      setErrorType('');
+      const signUpDetails = {
+        email,
+        nickName,
+        password,
+        confirmPassword,
+      };
+      const validatedSignUpDetails = await signUpSchema.validate(signUpDetails);
+      console.log(validatedSignUpDetails);
+    } catch (err) {
+      console.warn(err);
+      if (err.path === 'email' && err.name === 'ValidationError') {
+        setErrorType(err.path);
+        setError(err.message);
+      }
+      if (err.path === 'password' && err.name === 'ValidationError') {
+        setErrorType(err.path);
+        setError(err.message);
+      }
+      if (err.path === 'nickName' && err.name === 'ValidationError') {
+        setErrorType(err.path);
+        setError(err.message);
+      }
+      if (err.path === 'confirmPassword' && err.name === 'ValidationError') {
+        setErrorType(err.path);
+        setError(err.message);
+      }
+    }
   };
 
   return (
@@ -100,6 +135,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           disabled={false}
           autofocus
         />
+        {errorType === 'nickName' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
         <TextField
           className={classes.inputContainer}
           width={400}
@@ -108,6 +144,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           onChange={handleEmail}
           disabled={false}
         />
+        {errorType === 'email' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
         <TextField
           className={classes.inputContainer}
           width={400}
@@ -117,15 +154,19 @@ const SignUp: React.FC<SignUpProps> = () => {
           disabled={false}
           type='password'
         />
+        {errorType === 'password' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
         <TextField
           className={classes.inputContainer}
           width={400}
-          placeholder='Re type your password'
-          value={reTypePassword}
-          onChange={handleReTypePassword}
+          placeholder='Confirm your password'
+          value={confirmPassword}
+          onChange={handleConfirmPassword}
           disabled={false}
           type='password'
         />
+        {errorType === 'confirmPassword' && error.length > 0 && (
+          <InputLabel className={classes.error}>{error}</InputLabel>
+        )}
       </CardContainer>
     </Box>
   );

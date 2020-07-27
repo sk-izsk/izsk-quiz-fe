@@ -3,10 +3,10 @@
 exports[`SignUp renders correctly 1`] = `
 <DocumentFragment>
   <div
-    class="MuiBox-root MuiBox-root-8 makeStyles-mainContainer-1"
+    class="MuiBox-root MuiBox-root-9 makeStyles-mainContainer-1"
   >
     <div
-      class="_28vIk _2bGnb _2Xmdp _1SFBz makeStyles-card-9"
+      class="_28vIk _2bGnb _2Xmdp _1SFBz makeStyles-card-10"
     >
       <div
         class="_2So3v _2uw1B makeStyles-cardContentStyle-3"
@@ -71,7 +71,7 @@ exports[`SignUp renders correctly 1`] = `
           >
             <input
               class="_U6nBC _2nHt_ "
-              id="_72662_"
+              id="_31201_"
               placeholder="Enter your nick name"
               style="width: 400px; min-height: undefinedpx;"
               type="text"
@@ -94,7 +94,7 @@ exports[`SignUp renders correctly 1`] = `
           >
             <input
               class="_U6nBC _2nHt_ "
-              id="_52630_"
+              id="_60177_"
               placeholder="Enter your email"
               style="width: 400px; min-height: undefinedpx;"
               type="text"
@@ -117,7 +117,7 @@ exports[`SignUp renders correctly 1`] = `
           >
             <input
               class="_U6nBC _2nHt_ "
-              id="_34751_"
+              id="_63640_"
               placeholder="Enter your password"
               style="width: 400px; min-height: undefinedpx;"
               type="password"
@@ -140,8 +140,8 @@ exports[`SignUp renders correctly 1`] = `
           >
             <input
               class="_U6nBC _2nHt_ "
-              id="_63003_"
-              placeholder="Re type your password"
+              id="_23063_"
+              placeholder="Confirm your password"
               style="width: 400px; min-height: undefinedpx;"
               type="password"
               value=""

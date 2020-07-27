@@ -1,11 +1,12 @@
-import { Box, makeStyles } from '@material-ui/core';
-import React from 'react';
+import { Box, InputLabel, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
 import { FcIdea } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import { Button, CardAction, Divider, H6, TextField } from 'ui-neumorphism';
 import { CardContainer } from '../../components';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 import { useValueForTextField } from '../../utils';
+import { loginSchema } from '../../validation';
 
 export interface LoginProps {}
 
@@ -55,16 +56,40 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
   },
+  error: {
+    color: theme.palette.secondary.main,
+  },
 }));
 
 const Login: React.FC<LoginProps> = () => {
   const classes = useStyles();
   const [email, handleEmail] = useValueForTextField('');
   const [password, handlePassword] = useValueForTextField('');
+  const [error, setError] = useState<string>('');
+  const [errorType, setErrorType] = useState<string>('');
 
-  const handleLogin = (event: KeyboardEvent) => {
-    event.preventDefault();
-    console.log(email, password);
+  const handleLogin = async (event: KeyboardEvent) => {
+    try {
+      event.preventDefault();
+      setError('');
+      setErrorType('');
+      const loginDetails = {
+        email,
+        password,
+      };
+      const validatedLoginDetails = await loginSchema.validate(loginDetails);
+      console.log('this is login details', validatedLoginDetails);
+    } catch (err) {
+      console.warn(err);
+      if (err.path === 'email' && err.name === 'ValidationError') {
+        setErrorType(err.path);
+        setError(err.message);
+      }
+      if (err.path === 'password' && err.name === 'ValidationError') {
+        setErrorType(err.path);
+        setError(err.message);
+      }
+    }
   };
 
   return (
@@ -106,6 +131,7 @@ const Login: React.FC<LoginProps> = () => {
           disabled={false}
           autofocus
         />
+        {errorType === 'email' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
         <TextField
           className={classes.inputContainer}
           width={400}
@@ -115,6 +141,7 @@ const Login: React.FC<LoginProps> = () => {
           disabled={false}
           type='password'
         />
+        {errorType === 'password' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
       </CardContainer>
     </Box>
   );
