@@ -3,10 +3,12 @@ import React, { useState } from 'react';
 import { FcIdea } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
 import { Button, CardAction, H6, TextField } from 'ui-neumorphism';
+import { postSignUp } from '../../api';
 import { CardContainer } from '../../components';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 import { useValueForTextField } from '../../utils';
 import { signUpSchema } from '../../validation';
+import { SignUpSchema } from '../../validation/signUpSchema';
 
 export interface SignUpProps {}
 
@@ -70,14 +72,15 @@ const SignUp: React.FC<SignUpProps> = () => {
       event.preventDefault();
       setError('');
       setErrorType('');
-      const signUpDetails = {
+      const signUpDetails: SignUpSchema = {
         email,
         nickName,
         password,
         confirmPassword,
       };
-      const validatedSignUpDetails = await signUpSchema.validate(signUpDetails);
-      console.log(validatedSignUpDetails);
+      const validatedSignUpDetails: SignUpSchema = (await signUpSchema.validate(signUpDetails)) as SignUpSchema;
+      const response = await postSignUp(validatedSignUpDetails);
+      console.log('this is response', response?.data);
     } catch (err) {
       console.warn(err);
       if (['email', 'password', 'nickName', 'confirmPassword'].includes(err.path) && err.name === 'ValidationError') {

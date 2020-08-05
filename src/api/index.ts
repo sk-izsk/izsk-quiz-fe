@@ -1,2 +1,2 @@
-export { fetchQuestions, quizUrl } from './api';
-export { axiosQuiz } from './axios';
+export { fetchQuestions, postSignUp, quizUrl } from './api';
+export { axiosAuthorization, axiosQuiz } from './axios';
