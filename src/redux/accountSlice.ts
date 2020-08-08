@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AccountResponse } from '../api/response';
+import { getFromLocalStorage } from '../utils';
 
 export interface Account {
   isLoggedIn: boolean;
+  error?: string;
   user?: AccountResponse;
 }
 
 let initialState: Account = {
-  isLoggedIn: false,
+  isLoggedIn: getFromLocalStorage('isLoggedIn') !== null ? getFromLocalStorage('isLoggedIn') : false,
 };
 
 const accountSlice = createSlice({
@@ -24,9 +26,13 @@ const accountSlice = createSlice({
       delete state.user;
       return state;
     },
+    addError: (state: Account, action: PayloadAction<{ error: string }>) => {
+      state.isLoggedIn = false;
+      state.error = action.payload.error;
+    },
   },
 });
 
-export const { addUser, removeUser } = accountSlice.actions;
+export const { addUser, removeUser, addError } = accountSlice.actions;
 
 export default accountSlice.reducer;

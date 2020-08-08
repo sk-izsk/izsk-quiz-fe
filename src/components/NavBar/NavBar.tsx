@@ -5,8 +5,11 @@ import { FcAbout, FcHome, FcIdea } from 'react-icons/fc';
 import { IoMdMenu } from 'react-icons/io';
 import { MdAccountCircle } from 'react-icons/md';
 import { RiLoginCircleLine, RiLogoutCircleRLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Drawer } from '..';
+import { Account } from '../../redux/accountSlice';
+import { RootState } from '../../redux/store';
 import { theme } from '../../theme/muiTheme';
 
 const drawerWidth = 240;
@@ -48,44 +51,52 @@ export interface MenuItem {
   name: string;
   to: string;
   icon: JSX.Element;
+  display?: boolean;
 }
 
-const menuItems: MenuItem[] = [
+const menuItems: (display: boolean) => MenuItem[] = (display: boolean) => [
   {
     name: 'Login',
     to: '/login',
     icon: <RiLoginCircleLine size={25} color={theme.palette.primary.main} />,
+    display: !display,
   },
   {
     name: 'Sign Up',
     to: '/sign-up',
     icon: <MdAccountCircle size={25} color={theme.palette.primary.main} />,
+    display: !display,
   },
   {
     name: 'Home',
     to: '/home',
     icon: <FcHome size={25} />,
+    display,
   },
   {
     name: 'Start quiz !!!',
     to: '/quiz',
     icon: <FcIdea size={25} />,
+    display,
   },
   {
     name: 'Logout',
-    to: '/logout',
+    to: '/login',
     icon: <RiLogoutCircleRLine size={25} color={theme.palette.secondary.main} />,
+    display,
   },
   {
     name: 'About',
     to: '/about',
     icon: <FcAbout size={25} />,
+    display: true,
   },
 ];
 
 const NavBar: FC = () => {
   const classes = useStyles();
   const [open, setOpen] = useState<boolean>(false);
+  const userDetails: Account = useSelector<RootState, Account>((state: RootState) => state.account);
 
   const handleDrawer: () => void = () => {
     setOpen(!open);
@@ -117,7 +128,7 @@ const NavBar: FC = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer open={open} handleDrawer={handleDrawer} menuItems={menuItems} />
+      <Drawer open={open} handleDrawer={handleDrawer} menuItems={menuItems(userDetails.isLoggedIn)} />
     </div>
   );
 };
