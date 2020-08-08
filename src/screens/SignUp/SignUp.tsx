@@ -1,10 +1,13 @@
 import { Box, InputLabel, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FcIdea } from 'react-icons/fc';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Button, CardAction, H6, TextField } from 'ui-neumorphism';
-import { postSignUp } from '../../api';
 import { CardContainer } from '../../components';
+import { Actions, addError } from '../../redux';
+import { Account } from '../../redux/accountSlice';
+import { RootState } from '../../redux/store';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 import { useValueForTextField } from '../../utils';
 import { signUpSchema } from '../../validation';
@@ -66,12 +69,23 @@ const SignUp: React.FC<SignUpProps> = () => {
   const [confirmPassword, handleConfirmPassword] = useValueForTextField('');
   const [error, setError] = useState<string>('');
   const [errorType, setErrorType] = useState<string>('');
+  const dispatch = useDispatch();
+  const user: Account = useSelector<RootState, Account>((state: RootState) => state.account);
+  const [loading, setLoading] = useState<boolean>(user.isLoggedIn);
+
+  useEffect(() => {
+    if (user.error) {
+      setLoading(false);
+    }
+  }, [user.error]);
 
   const handleSignUp = async (event: KeyboardEvent) => {
     try {
       event.preventDefault();
       setError('');
       setErrorType('');
+      dispatch(addError({ error: '' }));
+      setLoading(true);
       const signUpDetails: SignUpSchema = {
         email,
         nickName,
@@ -79,8 +93,7 @@ const SignUp: React.FC<SignUpProps> = () => {
         confirmPassword,
       };
       const validatedSignUpDetails: SignUpSchema = (await signUpSchema.validate(signUpDetails)) as SignUpSchema;
-      const response = await postSignUp(validatedSignUpDetails);
-      console.log('this is response', response?.data);
+      dispatch(Actions.getSignUp(validatedSignUpDetails));
     } catch (err) {
       console.warn(err);
       if (['email', 'password', 'nickName', 'confirmPassword'].includes(err.path) && err.name === 'ValidationError') {
@@ -94,16 +107,17 @@ const SignUp: React.FC<SignUpProps> = () => {
     <Box className={classes.mainContainer}>
       <CardContainer
         cardContentStyle={classes.cardContentStyle}
+        cardLoading={loading}
         inset={true}
         cardAction={
           <CardAction className={classes.btnContainer}>
             <Link className={classes.link} to='/login'>
-              <Button disabled={false} className={classes.btn} rounded color={theme.palette.primary.main}>
+              <Button disabled={loading} className={classes.btn} rounded color={theme.palette.primary.main}>
                 Login
               </Button>
             </Link>
             <Button
-              disabled={false}
+              disabled={loading}
               onClick={handleSignUp}
               className={classes.btn}
               rounded
@@ -123,7 +137,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           placeholder='Enter your nick name'
           value={nickName}
           onChange={handleNickName}
-          disabled={false}
+          disabled={loading}
           autofocus
         />
         {errorType === 'nickName' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
@@ -133,7 +147,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           placeholder='Enter your email'
           value={email}
           onChange={handleEmail}
-          disabled={false}
+          disabled={loading}
         />
         {errorType === 'email' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
         <TextField
@@ -142,7 +156,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           placeholder='Enter your password'
           value={password}
           onChange={handlePassword}
-          disabled={false}
+          disabled={loading}
           type='password'
         />
         {errorType === 'password' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
@@ -152,12 +166,13 @@ const SignUp: React.FC<SignUpProps> = () => {
           placeholder='Confirm your password'
           value={confirmPassword}
           onChange={handleConfirmPassword}
-          disabled={false}
+          disabled={loading}
           type='password'
         />
         {errorType === 'confirmPassword' && error.length > 0 && (
           <InputLabel className={classes.error}>{error}</InputLabel>
         )}
+        {user.error && user.error.length > 0 && <InputLabel className={classes.error}>{user.error}</InputLabel>}
       </CardContainer>
     </Box>
   );

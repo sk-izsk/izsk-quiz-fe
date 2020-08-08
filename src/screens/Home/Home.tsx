@@ -7,6 +7,7 @@ import { Link, Redirect } from 'react-router-dom';
 import { Body1, Button } from 'ui-neumorphism';
 import { CardContainer, QuizResultCard } from '../../components';
 import { Actions } from '../../redux';
+import { Account } from '../../redux/accountSlice';
 import { RootState } from '../../redux/store';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 
@@ -57,7 +58,7 @@ const Home: React.FC<HomeProps> = () => {
   const classes = useStyles();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down(750));
   const dispatch = useDispatch();
-  const isUserLoggedIn: boolean = useSelector<RootState, boolean>((state: RootState) => state.account.isLoggedIn);
+  const user: Account = useSelector<RootState, Account>((state: RootState) => state.account);
 
   useEffect(() => {
     dispatch(Actions.getInformation());
@@ -65,7 +66,7 @@ const Home: React.FC<HomeProps> = () => {
 
   return (
     <>
-      {isUserLoggedIn ? (
+      {user.isLoggedIn ? (
         <>
           {true ? (
             <Box className={classes.emptyContainer}>
@@ -87,7 +88,8 @@ const Home: React.FC<HomeProps> = () => {
                 inset={true}
               >
                 <Body1>
-                  Hi Zee, you don't have any quiz history. Play a quiz first, in order to create the HISTORY!!!!
+                  Hi {user.user?.nickName}, you don't have any quiz history. Play a quiz first, in order to create the
+                  HISTORY!!!!
                   <span aria-label='emoji' role='img'>
                     😛
                   </span>

@@ -3,6 +3,7 @@ import { axiosAuthorization, fetchQuestions } from '../api';
 import { getFromLocalStorage, setFromLocalStorage } from '../utils';
 import { Difficulty, QuestionType } from '../utils/quizOptions';
 import { LoginSchema } from '../validation/loginSchema';
+import { SignUpSchema } from '../validation/signUpSchema';
 import { addError, addUser } from './accountSlice';
 import { addQuestions } from './questionListSlice';
 import { RootState } from './store';
@@ -25,8 +26,30 @@ const getLogin = (loginDetail: LoginSchema) => {
     try {
       const response = await axiosAuthorization.post('/login', loginDetail);
       const { data } = response;
-      console.log('this is login res', response);
-      if (data === 'Wrong email or password.' || data === 'Invalid password') {
+      if (data && data.length > 0) {
+        dispatch(addError({ error: data }));
+        return;
+      }
+      setFromLocalStorage('isLoggedIn', true);
+      setFromLocalStorage('token', data.token);
+      const userDetails = {
+        nickName: data.nickName,
+        email: data.email,
+        quizHistory: data.quizHistory,
+      };
+      dispatch(addUser(userDetails));
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+};
+
+const getSignUp = (SignUpDetails: SignUpSchema) => {
+  return async (dispatch: Dispatch, getState: RootState) => {
+    try {
+      const response = await axiosAuthorization.post('/sign-up', SignUpDetails);
+      const { data } = response;
+      if (data && data.length > 0) {
         dispatch(addError({ error: data }));
         return;
       }
@@ -70,6 +93,7 @@ const Actions = {
   getQuestion,
   getLogin,
   getInformation,
+  getSignUp,
 };
 
 export { Actions };
