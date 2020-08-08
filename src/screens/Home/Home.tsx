@@ -5,6 +5,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { Body1, Button } from 'ui-neumorphism';
+import { QuizHistory } from '../../api/response';
 import { CardContainer, QuizResultCard } from '../../components';
 import { Actions } from '../../redux';
 import { Account } from '../../redux/accountSlice';
@@ -54,6 +55,10 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   },
 }));
 
+export interface QuizHistoryResponse extends QuizHistory {
+  _id: string;
+}
+
 const Home: React.FC<HomeProps> = () => {
   const classes = useStyles();
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down(750));
@@ -68,7 +73,7 @@ const Home: React.FC<HomeProps> = () => {
     <>
       {user.isLoggedIn ? (
         <>
-          {true ? (
+          {user.user && !(user.user.quizHistory.length > 0) ? (
             <Box className={classes.emptyContainer}>
               <CardContainer
                 cardStyle={classes.emptyCard}
@@ -99,17 +104,9 @@ const Home: React.FC<HomeProps> = () => {
           ) : (
             <>
               <Box className={clsx([classes.mainContainer, isMobile && classes.mainContainerMobile])}>
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
-                <QuizResultCard />
+                {user.user?.quizHistory.map((quiz: QuizHistoryResponse & any) => {
+                  return <QuizResultCard key={quiz._id} {...quiz} />;
+                })}
                 <QuizResultCard />
               </Box>
               <Box className={classes.paginateContainer}>

@@ -39,6 +39,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   btn: {
     maxWidth: 200,
     width: '100%',
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
   cardContent: {
     textAlign: 'center',
@@ -90,13 +93,17 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({
             </Button>
           </Link>
           {retry ? (
-            <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
-              Retry
-            </Button>
+            <Link className={classes.btn} to='/quiz'>
+              <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
+                Retry
+              </Button>
+            </Link>
           ) : (
-            <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
-              Re-take
-            </Button>
+            <Link className={classes.btn} to='/quiz'>
+              <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
+                Re-take
+              </Button>
+            </Link>
           )}
         </CardAction>
       }
