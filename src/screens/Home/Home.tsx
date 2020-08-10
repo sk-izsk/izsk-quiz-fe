@@ -1,6 +1,7 @@
 import { Box, makeStyles, useMediaQuery } from '@material-ui/core';
 import { Pagination } from '@material-ui/lab';
 import clsx from 'clsx';
+import _ from 'lodash';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
@@ -67,13 +68,24 @@ const Home: React.FC<HomeProps> = () => {
 
   useEffect(() => {
     dispatch(Actions.getInformation());
-  }, [dispatch]);
+  }, [dispatch, user]);
 
   return (
     <>
-      {user.isLoggedIn ? (
+      {user.isLoggedIn && !_.isEmpty(user.user) ? (
         <>
-          {user.user && !(user.user.quizHistory.length > 0) ? (
+          {user.user !== undefined && user.user.quizHistory.length > 0 ? (
+            <>
+              <Box className={clsx([classes.mainContainer, isMobile && classes.mainContainerMobile])}>
+                {user.user?.quizHistory.map((quiz: QuizHistoryResponse & any) => {
+                  return <QuizResultCard key={quiz._id} {...quiz} />;
+                })}
+              </Box>
+              <Box className={classes.paginateContainer}>
+                <Pagination onChange={() => {}} count={10} variant='outlined' color='primary' />
+              </Box>
+            </>
+          ) : (
             <Box className={classes.emptyContainer}>
               <CardContainer
                 cardStyle={classes.emptyCard}
@@ -101,18 +113,6 @@ const Home: React.FC<HomeProps> = () => {
                 </Body1>
               </CardContainer>
             </Box>
-          ) : (
-            <>
-              <Box className={clsx([classes.mainContainer, isMobile && classes.mainContainerMobile])}>
-                {user.user?.quizHistory.map((quiz: QuizHistoryResponse & any) => {
-                  return <QuizResultCard key={quiz._id} {...quiz} />;
-                })}
-                <QuizResultCard />
-              </Box>
-              <Box className={classes.paginateContainer}>
-                <Pagination onChange={() => {}} count={10} variant='outlined' color='primary' />
-              </Box>
-            </>
           )}
         </>
       ) : (

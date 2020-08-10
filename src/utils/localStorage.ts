@@ -4,4 +4,8 @@ const getFromLocalStorage = (key: string) => JSON.parse(localStorage.getItem(key
 
 const removeFromLocalStorage = (key: string) => localStorage.removeItem(key);
 
-export { setFromLocalStorage, getFromLocalStorage, removeFromLocalStorage };
+const header = {
+  authorization: getFromLocalStorage('token'),
+};
+
+export { setFromLocalStorage, getFromLocalStorage, removeFromLocalStorage, header };

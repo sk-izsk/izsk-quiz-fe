@@ -1,6 +1,6 @@
 import { Dispatch } from '@reduxjs/toolkit';
 import { axiosAuthorization, fetchQuestions } from '../api';
-import { getFromLocalStorage, setFromLocalStorage } from '../utils';
+import { header, setFromLocalStorage } from '../utils';
 import { Difficulty, QuestionType } from '../utils/quizOptions';
 import { LoginSchema } from '../validation/loginSchema';
 import { SignUpSchema } from '../validation/signUpSchema';
@@ -61,6 +61,7 @@ const getSignUp = (SignUpDetails: SignUpSchema) => {
         quizHistory: data.quizHistory,
       };
       dispatch(addUser(userDetails));
+      window.location.reload();
     } catch (err) {
       console.warn(err);
     }
@@ -70,11 +71,7 @@ const getSignUp = (SignUpDetails: SignUpSchema) => {
 const getInformation = () => {
   return async (dispatch: Dispatch, getState: RootState) => {
     try {
-      const headers = {
-        authorization: getFromLocalStorage('token'),
-      };
-      console.log('this is headers', headers);
-      const response = await axiosAuthorization.get('/user', { headers });
+      const response = await axiosAuthorization.get('/user', { headers: header });
       console.log('this is response', await response);
       const { data } = response;
       const userDetails = {

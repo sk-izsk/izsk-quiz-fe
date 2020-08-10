@@ -2,7 +2,7 @@ import { Box, InputLabel, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { FcIdea } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { Button, CardAction, Divider, H6, TextField } from 'ui-neumorphism';
 import { CardContainer } from '../../components';
 import { Actions } from '../../redux/';
@@ -107,6 +107,7 @@ const Login: React.FC<LoginProps> = () => {
 
   return (
     <Box className={classes.mainContainer}>
+      {user.isLoggedIn && <Redirect to='/home' />}
       <CardContainer
         cardContentStyle={classes.cardContentStyle}
         inset={true}

@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import React from 'react';
 import { TiDelete, TiTick } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
@@ -118,7 +118,7 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({
         <TiDelete size={100} color={theme.palette.secondary.main} />
       )}
       <Subtitle2 className={classes.dateContainer} secondary>
-        {date && format(date as Date, 'do MMM yyyy')}
+        {date && format(parseISO(date as any), 'do MMM yyyy')}
       </Subtitle2>
       <H6>
         Question answered correctly:

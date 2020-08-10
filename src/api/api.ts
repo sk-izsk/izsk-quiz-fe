@@ -19,4 +19,14 @@ const fetchQuestions = async (amount: number, category: number | null, difficult
   }
 };
 
-export { quizUrl, fetchQuestions };
+export interface QuizDetails {
+  date: Date;
+  correctAnswer: number;
+  totalQuestion: number;
+  title: string;
+  type: string;
+}
+
+const postQuizHistory = (quizDetails: QuizDetails) => {};
+
+export { quizUrl, fetchQuestions, postQuizHistory };

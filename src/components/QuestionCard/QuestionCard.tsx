@@ -4,10 +4,11 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Body1, Button, CardAction, Divider, H6, Radio, RadioGroup } from 'ui-neumorphism';
 import { CardContainer } from '..';
+import { axiosAuthorization } from '../../api';
 import { QuestionList, Questions } from '../../redux/questionListSlice';
 import { RootState } from '../../redux/store';
 import { CustomTheme, theme } from '../../theme/muiTheme';
-import { getDifficultyOfQuiz, getTypeOfQuiz } from '../../utils';
+import { getDifficultyOfQuiz, getTypeOfQuiz, header } from '../../utils';
 import { ErrorCard } from '../ErrorCard/ErrorCard';
 import { LoadingScreen } from '../Loader/Loader';
 import { QuizResultModal } from '../QuizResultModal/QuizResultModal';
@@ -85,32 +86,41 @@ const QuestionCard: React.FC<QuestionCardProps> = () => {
     setAnswer(event.value);
   };
 
-  const handleCloseResultModal = () => {
+  const handleCloseResultModal = async () => {
+    await sendQuizHistoryData();
     setResultModal(false);
   };
 
-  const pageReload = () => window.location.reload();
+  const pageReload = async () => {
+    await sendQuizHistoryData();
+    window.location.reload();
+  };
 
-  let quizDetails;
+  let quizDetails: any;
 
   if (questions.questions !== undefined && questions.questions.length > 0) {
     quizDetails = {
       date: new Date(),
       correctAnswer: correct,
       totalQuestion: questions.questions?.length,
-      title: getTypeOfQuiz(questions.questions as QuestionList[]),
-      type: getDifficultyOfQuiz(questions.questions as QuestionList[]),
+      title: getTypeOfQuiz(questions.questions as QuestionList[]) as string,
+      type: getDifficultyOfQuiz(questions.questions as QuestionList[]) as string,
     };
   }
 
+  const sendQuizHistoryData = async () => {
+    try {
+      await axiosAuthorization.put('/quiz-history', quizDetails as any, { headers: header });
+    } catch (err) {
+      console.warn(err);
+    }
+  };
+
   return (
     <>
-      <QuizResultModal onClose={handleCloseResultModal} retry={pageReload} visible={resultModal} {...quizDetails} />
+      <QuizResultModal {...quizDetails} onClose={handleCloseResultModal} retry={pageReload} visible={resultModal} />
       {questions.questions !== undefined && questions.questions.length > 0 ? (
         <Box className={classes.mainContainer}>
-          {/* <Box className={classes.timerContainer}>
-            <Timer seconds={timer} />
-          </Box> */}
           <CardContainer
             cardStyle={classes.mainContainer}
             cardLoading={cardLoading}

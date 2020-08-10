@@ -1,9 +1,9 @@
 import { Box, makeStyles } from '@material-ui/core';
+import { format, parseISO } from 'date-fns';
 import React, { useState } from 'react';
 import { Body2, Button, CardAction, H5, Subtitle2 } from 'ui-neumorphism';
-import { QuizResultModal } from '..';
+import { CardContainer, QuizResultModal } from '..';
 import { CustomTheme, theme } from '../../theme/muiTheme';
-import { CardContainer } from '../CardContainer/CardContainer';
 
 export interface QuizResultCardProps {
   date?: string | Date;
@@ -52,7 +52,7 @@ const QuizResultCard: React.FC<QuizResultCardProps> = ({ date, correctAnswer, to
         visible={openModal}
         onClose={handleCloseModal}
         correctAnswer={correctAnswer}
-        // date={date}
+        date={date}
         title={title}
         totalQuestion={totalQuestion}
         type={type}
@@ -75,7 +75,9 @@ const QuizResultCard: React.FC<QuizResultCardProps> = ({ date, correctAnswer, to
       >
         <H5>{title}</H5>
         <Subtitle2 className={classes.dateContainer} secondary>
-          {date}
+          {/* {date} */}
+          {/* {date && parseISO(date as any)} */}
+          {date && format(parseISO(date as any), 'do MMM yyyy')}
         </Subtitle2>
         <Body2>
           Result of quiz
