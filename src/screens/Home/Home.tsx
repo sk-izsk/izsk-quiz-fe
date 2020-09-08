@@ -1,10 +1,9 @@
 import { Box, makeStyles, useMediaQuery } from '@material-ui/core';
-import { Pagination } from '@material-ui/lab';
 import clsx from 'clsx';
 import _ from 'lodash';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { Body1, Button } from 'ui-neumorphism';
 import { QuizHistory } from '../../api/response';
 import { CardContainer, QuizResultCard } from '../../components';
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   mainContainer: {
     marginTop: theme.spacing(10),
     display: 'grid',
-    gridTemplateColumns: '1fr 1fr 1fr 1fr',
+    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr',
     gridTemplateRows: '1fr 1fr',
   },
   mainContainerMobile: {
@@ -65,25 +64,33 @@ const Home: React.FC<HomeProps> = () => {
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down(750));
   const dispatch = useDispatch();
   const user: Account = useSelector<RootState, Account>((state: RootState) => state.account);
+  const history = useHistory();
 
   useEffect(() => {
-    dispatch(Actions.getInformation());
-  }, [dispatch, user]);
+    if (history.location.state === undefined) {
+      dispatch(Actions.getInformation());
+    }
+  }, [dispatch, user, history.location.state]);
 
   return (
     <>
-      {user.isLoggedIn && !_.isEmpty(user.user) ? (
+      {user.isLoggedIn && !_.isEmpty(user.user?.quizHistory) ? (
         <>
-          {user.user !== undefined && user.user.quizHistory.length > 0 ? (
+          {user.user?.quizHistory.length && user.user.quizHistory.length > 0 ? (
             <>
               <Box className={clsx([classes.mainContainer, isMobile && classes.mainContainerMobile])}>
                 {user.user?.quizHistory.map((quiz: QuizHistoryResponse & any) => {
                   return <QuizResultCard key={quiz._id} {...quiz} />;
                 })}
               </Box>
-              <Box className={classes.paginateContainer}>
-                <Pagination onChange={() => {}} count={10} variant='outlined' color='primary' />
-              </Box>
+              {/* <Box className={classes.paginateContainer}>
+                <Pagination
+                  onChange={() => {}}
+                  count={Math.round(user.user.quizHistory.length ? user.user.quizHistory.length / itemsPerPage : 15)}
+                  variant='outlined'
+                  color='primary'
+                />
+              </Box> */}
             </>
           ) : (
             <Box className={classes.emptyContainer}>

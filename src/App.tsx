@@ -19,12 +19,12 @@ const RouterApp = () => {
     <Switch>
       <Suspense fallback={<LoadingScreen />}>
         <Route exact path='/'>
-          <Redirect to={userDetails.isLoggedIn ? '/quiz' : '/login'} />
+          <Redirect to={userDetails.isLoggedIn ? '/home' : '/login'} />
         </Route>
         <Route path='/home' exact component={userDetails.isLoggedIn ? HomeScreen : LoginScreen} />
         <Route path='/quiz' exact component={userDetails.isLoggedIn ? QuizScreen : LoginScreen} />
-        <Route path='/sign-up' exact component={userDetails.isLoggedIn ? QuizScreen : SignUpScreen} />
-        <Route path='/login' exact component={userDetails.isLoggedIn ? QuizScreen : LoginScreen} />
+        <Route path='/sign-up' exact component={userDetails.isLoggedIn ? HomeScreen : SignUpScreen} />
+        <Route path='/login' exact component={userDetails.isLoggedIn ? HomeScreen : LoginScreen} />
         <Route path='/about' exact component={AboutScreen} />
       </Suspense>
     </Switch>

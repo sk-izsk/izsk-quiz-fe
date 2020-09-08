@@ -76,6 +76,7 @@ const QuestionCard: React.FC<QuestionCardProps> = () => {
       setDisable(true);
       setCardLoading(true);
       setResultModal(true);
+      setAnswer(undefined);
     } else {
       setAnswer(undefined);
       setQuestionNumber(questionNumber + 1);

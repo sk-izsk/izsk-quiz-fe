@@ -2,7 +2,7 @@ import { Box, InputLabel, makeStyles } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { FcIdea } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { Button, CardAction, Divider, H6, TextField } from 'ui-neumorphism';
 import { CardContainer } from '../../components';
 import { Actions } from '../../redux/';
@@ -75,6 +75,7 @@ const Login: React.FC<LoginProps> = () => {
   const dispatch = useDispatch();
   const user: Account = useSelector<RootState, Account>((state: RootState) => state.account);
   const [loading, setLoading] = useState<boolean>(user.isLoggedIn);
+  const history = useHistory();
 
   const handleLogin = async (event: KeyboardEvent) => {
     try {
@@ -90,6 +91,7 @@ const Login: React.FC<LoginProps> = () => {
       const validatedLoginDetails = await loginSchema.validate(loginDetails);
       console.log('this is login details', validatedLoginDetails);
       dispatch(Actions.getLogin(validatedLoginDetails as LoginSchema));
+      history.push('/home', '/login');
     } catch (err) {
       console.warn(err);
       if (['email', 'password'].includes(err.path) && err.name === 'ValidationError') {
