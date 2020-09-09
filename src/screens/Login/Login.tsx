@@ -1,12 +1,17 @@
 import { Box, InputLabel, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FcIdea } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import { Button, CardAction, Divider, H6, TextField } from 'ui-neumorphism';
 import { CardContainer } from '../../components';
+import { Actions } from '../../redux/';
+import { Account, addError } from '../../redux/accountSlice';
+import { RootState } from '../../redux/store';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 import { useValueForTextField } from '../../utils';
 import { loginSchema } from '../../validation';
+import { LoginSchema } from '../../validation/loginSchema';
 
 export interface LoginProps {}
 
@@ -67,47 +72,59 @@ const Login: React.FC<LoginProps> = () => {
   const [password, handlePassword] = useValueForTextField('');
   const [error, setError] = useState<string>('');
   const [errorType, setErrorType] = useState<string>('');
+  const dispatch = useDispatch();
+  const user: Account = useSelector<RootState, Account>((state: RootState) => state.account);
+  const [loading, setLoading] = useState<boolean>(user.isLoggedIn);
+  const history = useHistory();
 
   const handleLogin = async (event: KeyboardEvent) => {
     try {
       event.preventDefault();
       setError('');
+      dispatch(addError({ error: '' }));
       setErrorType('');
-      const loginDetails = {
+      setLoading(true);
+      const loginDetails: LoginSchema = {
         email,
         password,
       };
       const validatedLoginDetails = await loginSchema.validate(loginDetails);
       console.log('this is login details', validatedLoginDetails);
+      dispatch(Actions.getLogin(validatedLoginDetails as LoginSchema));
+      history.push('/home', '/login');
     } catch (err) {
       console.warn(err);
-      if (err.path === 'email' && err.name === 'ValidationError') {
-        setErrorType(err.path);
-        setError(err.message);
-      }
-      if (err.path === 'password' && err.name === 'ValidationError') {
+      if (['email', 'password'].includes(err.path) && err.name === 'ValidationError') {
         setErrorType(err.path);
         setError(err.message);
       }
     }
   };
 
+  useEffect(() => {
+    if (user.error) {
+      setLoading(false);
+    }
+  }, [user.error]);
+
   return (
     <Box className={classes.mainContainer}>
+      {user.isLoggedIn && <Redirect to='/home' />}
       <CardContainer
         cardContentStyle={classes.cardContentStyle}
         inset={true}
+        cardLoading={loading}
         cardAction={
           <>
             <Divider className={classes.divider} />
             <CardAction className={classes.btnContainer}>
               <Link className={classes.link} to='/sign-up'>
-                <Button disabled={false} className={classes.btn} rounded color={theme.palette.primary.main}>
+                <Button disabled={loading} className={classes.btn} rounded color={theme.palette.primary.main}>
                   Sign Up
                 </Button>
               </Link>
               <Button
-                disabled={false}
+                disabled={loading}
                 className={classes.btn}
                 rounded
                 color={theme.palette.success.contrastText}
@@ -128,7 +145,7 @@ const Login: React.FC<LoginProps> = () => {
           placeholder='Enter your email'
           value={email}
           onChange={handleEmail}
-          disabled={false}
+          disabled={loading}
           autofocus
         />
         {errorType === 'email' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
@@ -138,10 +155,11 @@ const Login: React.FC<LoginProps> = () => {
           placeholder='Enter your password'
           value={password}
           onChange={handlePassword}
-          disabled={false}
+          disabled={loading}
           type='password'
         />
         {errorType === 'password' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
+        {user.error && user.error.length > 0 && <InputLabel className={classes.error}>{user.error}</InputLabel>}
       </CardContainer>
     </Box>
   );

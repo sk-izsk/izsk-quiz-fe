@@ -1,44 +1,123 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-## Available Scripts
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/sk-izsk/izsk-corona-tracker-web">
+    <img src="public/favicon.png" alt="Logo" width="80" height="80">
+  </a>
 
-In the project directory, you can run:
+  <h3 align="center">Quiz Application</h3>
 
-### `yarn start`
+  <p align="center">
+    Built in React with love and passion
+    <br />
+    <a href="https://izsk-covid-tracker.netlify.app"><strong>Explore the demo »</strong></a>
+    <br />
+    <br />
+  </p>
+</p>
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<!-- TABLE OF CONTENTS -->
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Table of Contents
 
-### `yarn test`
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+    - [Frontend](#frontend)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Contact](#contact)
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<!-- ABOUT THE PROJECT -->
 
-### `yarn build`
+## About The Project
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+[![Product Name Screen Shot][product-screenshot]](https://youtu.be/BVYRaqlpKCw)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+I love coding specially on javascript/typescript. This is my small effort to show my skill and knowledge so far. As headline suggest I create this quiz application just out of my passion and 💕 React.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Built With
 
-### `yarn eject`
+#### Frontend
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The Frontend of this quiz application build mainly on React along with some other important technologies followed
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- [React](https://reactjs.org)
+- [React-Hooks](https://reactjs.org)
+- [React-Spring](https://www.react-spring.io)
+- [React router dom](https://reactrouter.com)
+- [Redux tool kit](https://redux-toolkit.js.org)
+- [React-Redux](https://react-redux.js.org)
+- [Redux thunk](https://github.com/reduxjs/redux-thunk)
+- [Material UI](https://material-ui.com)
+- [Axios](https://github.com/axios/axios)
+- [Typescript](https://www.typescriptlang.org)
+- [Yarn](https://classic.yarnpkg.com/lang/en/)
+- [Prettier](https://prettier.io)
+- [Husky](https://github.com/typicode/husky)
+- [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro)
+- [API](https://opentdb.com/api_config.php)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<!-- GETTING STARTED -->
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Getting Started
 
-## Learn More
+This is just simple guide incase if you wish to run this locally
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Prerequisites
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+You can either go with Yarn (version-1) or NPM. I personally like Yarn so I describe accordingly. Kindly follow the corresponding npm command incase if you use npm
+
+- Yarn / npm
+
+```sh
+npm install yarn
+```
+
+### Installation
+
+1. Clone the repo
+
+```sh
+git clone https://github.com/sk-izsk/izsk-quiz-fe.git
+```
+
+2. Install NPM packages
+
+```sh
+yarn
+```
+
+```sh
+yarn start
+```
+
+3. Testing
+
+```sh
+yarn test
+```
+
+4. For prettier
+
+```sh
+yarn prettier:fix
+```
+
+<!-- CONTACT -->
+
+## Contact
+
+Shaikh Zeeshan Murshed - [@Sk_iZsk](https://twitter.com/Sk_iZsk) - sk.zeeshan1992@gmail.com - [Portfolio](https://izsk.netlify.app)
+
+Project Link: [https://github.com/sk-izsk/izsk-quiz-fe.git](https://github.com/sk-izsk/izsk-quiz-fe.git)
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://www.linkedin.com/in/skizsk/
+[product-screenshot]: README/quiz.gif

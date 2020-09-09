@@ -1,5 +1,5 @@
 import { AccountResponse } from '../api/response';
-import account, { Account, addUser, removeUser } from './accountSlice';
+import account, { Account, addError, addUser, removeUser } from './accountSlice';
 
 const initialState: Account = {
   isLoggedIn: false,
@@ -7,6 +7,7 @@ const initialState: Account = {
 
 interface Payload {
   user: AccountResponse;
+  error: { error: string };
 }
 
 describe('account reducer', () => {
@@ -75,5 +76,19 @@ describe('account reducer', () => {
         },
       ),
     ).toEqual(initialState);
+  });
+
+  it('should handle add error', () => {
+    expect(
+      account(initialState, {
+        type: addError.type,
+        payload: {
+          error: 'wrong name',
+        } as Payload['error'],
+      }),
+    ).toEqual({
+      isLoggedIn: false,
+      error: 'wrong name',
+    });
   });
 });

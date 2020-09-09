@@ -12,6 +12,7 @@ import React from 'react';
 import { FiChevronsLeft, FiChevronsRight } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { CustomTheme, theme } from '../../theme/muiTheme';
+import { removeFromLocalStorage } from '../../utils';
 import { MenuItem } from '../NavBar/NavBar';
 
 export interface DrawerProps {
@@ -62,6 +63,12 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   },
 }));
 
+const handleLogout = () => {
+  removeFromLocalStorage('isLoggedIn');
+  removeFromLocalStorage('token');
+  window.location.reload();
+};
+
 const Drawer: React.FC<DrawerProps> = ({ open, handleDrawer, menuItems }) => {
   const classes = useStyles();
   return (
@@ -82,14 +89,22 @@ const Drawer: React.FC<DrawerProps> = ({ open, handleDrawer, menuItems }) => {
       </div>
       <Divider />
       <List>
-        {menuItems.map((menuItem: MenuItem) => (
-          <Link className={classes.link} to={menuItem.to} key={menuItem.name} onClick={handleDrawer}>
-            <ListItem button>
-              <ListItemIcon>{menuItem.icon}</ListItemIcon>
-              <ListItemText primary={menuItem.name} />
-            </ListItem>
-          </Link>
-        ))}
+        {menuItems.map(
+          (menuItem: MenuItem) =>
+            menuItem.display && (
+              <Link
+                className={classes.link}
+                to={menuItem.to}
+                key={menuItem.name}
+                onClick={menuItem.name === 'Logout' ? handleLogout : handleDrawer}
+              >
+                <ListItem button>
+                  <ListItemIcon>{menuItem.icon}</ListItemIcon>
+                  <ListItemText primary={menuItem.name} />
+                </ListItem>
+              </Link>
+            ),
+        )}
       </List>
     </MuiDrawer>
   );

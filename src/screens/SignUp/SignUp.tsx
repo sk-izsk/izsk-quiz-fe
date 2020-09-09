@@ -1,12 +1,17 @@
 import { Box, InputLabel, makeStyles } from '@material-ui/core';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FcIdea } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, CardAction, H6, TextField } from 'ui-neumorphism';
 import { CardContainer } from '../../components';
+import { Actions, addError } from '../../redux';
+import { Account } from '../../redux/accountSlice';
+import { RootState } from '../../redux/store';
 import { CustomTheme, theme } from '../../theme/muiTheme';
 import { useValueForTextField } from '../../utils';
 import { signUpSchema } from '../../validation';
+import { SignUpSchema } from '../../validation/signUpSchema';
 
 export interface SignUpProps {}
 
@@ -64,35 +69,36 @@ const SignUp: React.FC<SignUpProps> = () => {
   const [confirmPassword, handleConfirmPassword] = useValueForTextField('');
   const [error, setError] = useState<string>('');
   const [errorType, setErrorType] = useState<string>('');
+  const dispatch = useDispatch();
+  const user: Account = useSelector<RootState, Account>((state: RootState) => state.account);
+  const [loading, setLoading] = useState<boolean>(user.isLoggedIn);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (user.error) {
+      setLoading(false);
+    }
+  }, [user.error]);
 
   const handleSignUp = async (event: KeyboardEvent) => {
     try {
       event.preventDefault();
       setError('');
       setErrorType('');
-      const signUpDetails = {
+      dispatch(addError({ error: '' }));
+      setLoading(true);
+      const signUpDetails: SignUpSchema = {
         email,
         nickName,
         password,
         confirmPassword,
       };
-      const validatedSignUpDetails = await signUpSchema.validate(signUpDetails);
-      console.log(validatedSignUpDetails);
+      const validatedSignUpDetails: SignUpSchema = (await signUpSchema.validate(signUpDetails)) as SignUpSchema;
+      dispatch(Actions.getSignUp(validatedSignUpDetails));
+      history.push('/home', '/sign-up');
     } catch (err) {
       console.warn(err);
-      if (err.path === 'email' && err.name === 'ValidationError') {
-        setErrorType(err.path);
-        setError(err.message);
-      }
-      if (err.path === 'password' && err.name === 'ValidationError') {
-        setErrorType(err.path);
-        setError(err.message);
-      }
-      if (err.path === 'nickName' && err.name === 'ValidationError') {
-        setErrorType(err.path);
-        setError(err.message);
-      }
-      if (err.path === 'confirmPassword' && err.name === 'ValidationError') {
+      if (['email', 'password', 'nickName', 'confirmPassword'].includes(err.path) && err.name === 'ValidationError') {
         setErrorType(err.path);
         setError(err.message);
       }
@@ -103,16 +109,17 @@ const SignUp: React.FC<SignUpProps> = () => {
     <Box className={classes.mainContainer}>
       <CardContainer
         cardContentStyle={classes.cardContentStyle}
+        cardLoading={loading}
         inset={true}
         cardAction={
           <CardAction className={classes.btnContainer}>
             <Link className={classes.link} to='/login'>
-              <Button disabled={false} className={classes.btn} rounded color={theme.palette.primary.main}>
+              <Button disabled={loading} className={classes.btn} rounded color={theme.palette.primary.main}>
                 Login
               </Button>
             </Link>
             <Button
-              disabled={false}
+              disabled={loading}
               onClick={handleSignUp}
               className={classes.btn}
               rounded
@@ -132,7 +139,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           placeholder='Enter your nick name'
           value={nickName}
           onChange={handleNickName}
-          disabled={false}
+          disabled={loading}
           autofocus
         />
         {errorType === 'nickName' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
@@ -142,7 +149,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           placeholder='Enter your email'
           value={email}
           onChange={handleEmail}
-          disabled={false}
+          disabled={loading}
         />
         {errorType === 'email' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
         <TextField
@@ -151,7 +158,7 @@ const SignUp: React.FC<SignUpProps> = () => {
           placeholder='Enter your password'
           value={password}
           onChange={handlePassword}
-          disabled={false}
+          disabled={loading}
           type='password'
         />
         {errorType === 'password' && error.length > 0 && <InputLabel className={classes.error}>{error}</InputLabel>}
@@ -161,12 +168,13 @@ const SignUp: React.FC<SignUpProps> = () => {
           placeholder='Confirm your password'
           value={confirmPassword}
           onChange={handleConfirmPassword}
-          disabled={false}
+          disabled={loading}
           type='password'
         />
         {errorType === 'confirmPassword' && error.length > 0 && (
           <InputLabel className={classes.error}>{error}</InputLabel>
         )}
+        {user.error && user.error.length > 0 && <InputLabel className={classes.error}>{user.error}</InputLabel>}
       </CardContainer>
     </Box>
   );

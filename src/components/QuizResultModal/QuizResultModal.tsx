@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core';
-import { format } from 'date-fns';
 import React from 'react';
 import { TiDelete, TiTick } from 'react-icons/ti';
 import { Link } from 'react-router-dom';
@@ -39,6 +38,9 @@ const useStyles = makeStyles((theme: CustomTheme) => ({
   btn: {
     maxWidth: 200,
     width: '100%',
+    '&:hover': {
+      textDecoration: 'none',
+    },
   },
   cardContent: {
     textAlign: 'center',
@@ -90,13 +92,17 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({
             </Button>
           </Link>
           {retry ? (
-            <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
-              Retry
-            </Button>
+            <Link className={classes.btn} to='/quiz'>
+              <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
+                Retry
+              </Button>
+            </Link>
           ) : (
-            <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
-              Re-take
-            </Button>
+            <Link className={classes.btn} to='/quiz'>
+              <Button onClick={retry} className={classes.btn} rounded color={theme.palette.primary.main}>
+                Re-take
+              </Button>
+            </Link>
           )}
         </CardAction>
       }
@@ -111,7 +117,8 @@ const QuizResultModal: React.FC<QuizResultModalProps> = ({
         <TiDelete size={100} color={theme.palette.secondary.main} />
       )}
       <Subtitle2 className={classes.dateContainer} secondary>
-        {date && format(date as Date, 'do MMM yyyy')}
+        {/* {date && format(parseISO(date as any), 'do MMM yyyy')} */}
+        {/* {date} */}
       </Subtitle2>
       <H6>
         Question answered correctly:
