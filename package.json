@@ -11,7 +11,7 @@
     "date-fns": "^2.16.1",
     "history": "^5.0.0",
     "husky": "^4.3.0",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "particles-bg": "^2.5.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
